@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block cuerpo %}
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        {% for noticia in noticias %}
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <a href="{% url 'fullnoti'  noticia.id %}" style="text-decoration: none; color: inherit;">
+                        <h3 class="card-title" style="color: black;"><strong>{{ noticia.titulo }}</strong></h3>
+                    </a>
+                    {% if noticia.imagen %}
+                    <img src="{{ noticia.imagen.url }}" class="card-img-top" alt="Imagen de la noticia" style="width: 400px; height: 400px; object-fit: cover;">    
+                    {% endif %}
+                    <p class="card-text">{{ noticia.cuerpo|truncatechars:200 }}</p>    
+                    <p class="card-text"><small class="text-muted">Publicado el: {{ noticia.fecha }}</small></p>
+                    <p class="card-text"><strong>Grupo:</strong> {{ noticia.grupo.grupo }}</p>
+                    <p class="card-text"><strong>Autor:</strong> {{ noticia.autor.nombre }}</p>
+                </div>
+            </div>
+        </div>
+        {% cycle '' '<div class="w-100"></div>' %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

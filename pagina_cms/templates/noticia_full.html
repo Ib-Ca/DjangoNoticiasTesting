@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block cuerpo %}
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title" style="color: black;">{{ noticia.titulo }}</h2>
+            <p class="card-text"><small class="text-muted">Publicado el: {{ noticia.fecha }}</small></p>
+            <p class="card-text"><strong>Grupo:</strong> {{ noticia.grupo.grupo }}</p>
+            <p class="card-text"><strong>Autor:</strong> {{ noticia.autor.nombre }}</p>
+            {% if noticia.imagen %}
+            <img src="{{ noticia.imagen.url }}" class="card-img-top" alt="Imagen de la noticia" style="max-width: 400px; height: auto;">
+            {% endif %}
+            {% if nivel_usuario == "ADMINISTRADOR" %}
+    
+            {% endif %}
+            <p class="card-text">{{ noticia.cuerpo }}</p>
+            
+        </div>
+    </div>
+    
+    
+</div>
+{% endblock %}

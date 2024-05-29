@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block cuerpo %}
+<div class="untree_co-section pb-0">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-lg-7 text-center mx-auto">
+          <h2 class="section-heading gsap-reveal-hero mb-0"><strong>Panel de Control</strong></h2>
+          <div class="wave gsap-reveal-hero" >
+            <svg>
+              <path d="M10,10 L50,100 L90,50" stroke="#0389ff"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-7 form-group">
+          <label>{{m_error}}</label>
+        </div>
+        <div class="col-lg-7">
+          <p><strong>Usuario:</strong>{{nombre_usuario}}</p> 
+          <p><strong>Usuario:</strong>{{nivel_usuario}}</p> 
+        </div>
+        <div class="col-lg-7">
+          <ul>
+            <li><a href="{% url 'inicio' %}" >Ir al Inicio</a></li>
+            <li><a href="{% url 'salir' %}" >Salir del sistema</a></li>
+            <li><a href="{% url 'verusuario'%}">Administrar Usuarios</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
