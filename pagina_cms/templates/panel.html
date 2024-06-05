@@ -25,7 +25,10 @@
           <ul>
             <li><a href="{% url 'inicio' %}" >Ir al Inicio</a></li>
             <li><a href="{% url 'salir' %}" >Salir del sistema</a></li>
+            {% if nivel_usuario == "ADMINISTRADOR" %}
             <li><a href="{% url 'verusuario'%}">Administrar Usuarios</a></li>
+            {%endif%}
+
           </ul>
         </div>
       </div>

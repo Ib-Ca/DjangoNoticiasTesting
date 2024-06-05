@@ -29,6 +29,7 @@ def acceder(request):
                 request.session['codigo_usuario']=verificar_usuario[0].id
                 request.session['nombre_usuario']=verificar_usuario[0].nombre
                 request.session['nivel_usuario']=verificar_usuario[0].nivel
+                request.session['usuario_autenticado'] = True
                 variables['nombre_usuario']= request.session['nombre_usuario']
                 return render(request,'panel.html', variables)
             else:
@@ -42,7 +43,12 @@ def salir(request):
     #request.session['codigo_usuario']=0
     #request.session['nombre_usuario']=''
     #request.session['nivel_usuario']=''
+    request.session['usuario_autenticado'] = False
     del request.session['codigo_usuario']
     del request.session['nombre_usuario']
     del request.session['nivel_usuario'] 
     return redirect('inicio')
+
+def create(request):
+    if request.method=='GET':
+            return render(request,'usuario_create.html')

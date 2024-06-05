@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import usuarios
 
 def ver(request):
@@ -38,8 +38,17 @@ def nuevo(request):
         nuevousuario.save()
         return redirect ('verusuario')
     
-def modificar(request):
-    return redirect ('verusuario')
+def modificar(request, id):
+    usuario = get_object_or_404(usuarios, pk=id)
+    if request.method == 'POST':
+        f_estado=request.POST.get('estado')
+        f_nivel=request.POST.get('nivel')
+        usuario.estado=f_estado
+        usuario.nivel=f_nivel
+        usuario.save()
+        return redirect ('verusuario')
+    else:
+         return render(request, 'usuario_modify.html', {'usuario': usuario})
     
 def borrar(request, id):
     para_borrar=usuarios.objects.get(pk=id)

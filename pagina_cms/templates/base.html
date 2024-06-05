@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="{% static 'css/aos.css' %}">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-  <title>Minimal Free HTML Template by Untree.co</title>
+  <title>Noticias KingWinWin</title>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="100">
@@ -55,13 +55,17 @@
       <div class="site-navigation">
         <a href="{% url 'inicio' %}" class="logo m-0">Marco Aurelio<span class="text-primary">.</span></a>
         <ul class="js-clone-nav d-none d-lg-inline-none site-menu float-right site-nav-wrap">
-          <li><a href="#home-section" class="nav-link active">Home</a></li>
           {% if nivel_usuario == "ADMINISTRADOR" %}
           <li><a href="{% url  'addnoti' %}" class="nav-link">Agregar Noticia</a></li>
           <li><a href="{% url 'verusuario' %}">Administrar Usuarios</a></li>
           {% endif %}
-          <li><a href="{% url 'acceder' %}">Acceder al Sistema</a></li>
+          {% if usuario_autenticado %}
+          <li><a href="{% url 'acceder' %}" >Panel de Usuario</a></li>
           <li><a href="{% url 'salir' %}" >Salir del sistema</a></li>
+          {% else %}
+          <li><a href="{% url 'create' %}">Crear Cuenta</a></li>
+          <li><a href="{% url 'acceder' %}">Acceder al Sistema</a></li>
+          {% endif %}
         </ul>
 
         <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-inline-block" data-toggle="collapse" data-target="#main-navbar">
