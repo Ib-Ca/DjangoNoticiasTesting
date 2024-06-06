@@ -18,3 +18,20 @@ def enviar_comentario(request, noticia_id):
         return redirect('fullnoti', noticia_id=noticia_id)
     else:
         return redirect('fullnoti', noticia_id=noticia_id)
+    
+    
+from django.shortcuts import redirect
+
+def elim_comentario(request, comentario_id):
+    #print(comentario_id)
+    comentario = comentarios.objects.get(pk=comentario_id)
+    comentario.delete()
+    return redirect('fullnoti', noticia_id=comentario.noticia.id)
+
+def pass_comentario(request, comentario_id):
+    #print(comentario_id)
+    comentario = comentarios.objects.get(pk=comentario_id)
+    comentario.visible = 'SI'
+    comentario.save()
+    return redirect('fullnoti', noticia_id=comentario.noticia.id)
+

@@ -15,4 +15,6 @@ urlpatterns = [
     path('create', inicio.create, name='create'),
     path('salir', inicio.salir, name='salir'),
     path('enviar_comentario/<int:noticia_id>', comentarios.enviar_comentario, name='enviar_comentario'),
+    path('elim_comentario/<int:comentario_id>', comentarios.elim_comentario, name='elim_comentario'),
+    path('pass_comentario/<int:comentario_id>', comentarios.pass_comentario, name='pass_comentario'),
 ]
