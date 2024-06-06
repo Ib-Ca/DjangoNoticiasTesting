@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import noticias, grupos, usuarios
+from .models import noticias, grupos, usuarios, comentarios
 from django.core.exceptions import PermissionDenied
 
 
@@ -46,4 +46,9 @@ def ver_noticias(request):
 def ver_noticia_completa(request, noticia_id):
     noticia = get_object_or_404(noticias, id=noticia_id)
     nivel_usuario = request.session.get('nivel_usuario')
-    return render(request, 'noticia_full.html', {'noticia': noticia, 'nivel_usuario': nivel_usuario})
+    all_comment = comentarios.objects.filter(noticia=noticia)
+    comentarios_visibles = []
+    for comentario in all_comment:
+        if comentario.visible == 'SI' or nivel_usuario == 'ADMINISTRADOR' or nivel_usuario == 'MODERADOR':
+            comentarios_visibles.append(comentario)
+    return render(request, 'noticia_full.html', {'noticia': noticia, 'nivel_usuario': nivel_usuario, 'comments': all_comment})

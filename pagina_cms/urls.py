@@ -1,5 +1,5 @@
 from django.urls import path
-from . import inicio, usuarios, noticias
+from . import inicio, usuarios, noticias, comentarios
 
 urlpatterns = [
     path('', inicio.inicio, name='inicio'),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('acceder', inicio.acceder, name='acceder'),
     path('create', inicio.create, name='create'),
     path('salir', inicio.salir, name='salir'),
+    path('enviar_comentario/<int:noticia_id>', comentarios.enviar_comentario, name='enviar_comentario'),
 ]

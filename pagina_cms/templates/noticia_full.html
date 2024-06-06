@@ -22,7 +22,32 @@
             
         </div>
     </div>
-    
-    
+    <div style="margin-top: 60px;" class="card">
+        <h2 class="card-header" style="color: black;">Caja de Comentarios</h2>
+        <div class="card-body">
+            <form method="post" action="{% url 'enviar_comentario' noticia.id %}" style="margin-bottom: 80px;">
+                {% csrf_token %}
+                <input type="text" name="cuerpo" class="form-control" placeholder="Comenta!" required>
+                <button type="submit" class="btn btn-primary">Enviar comentario</button>
+            </form>
+            {% for comments in comments %}
+            {% if comentario.visible == 'SI' or nivel_usuario == 'ADMINISTRADOR' or nivel_usuario == 'MODERADOR' %}
+            <div class="media">
+                {% if nivel_usuario == "ADMINISTRADOR" or nivel_usuario == "MODERADOR" %}
+                <div class="btn-group-vertical" style="margin-right: 10px">
+                    <button type="button" class="btn btn-success">Si</button>
+                    <button type="button" class="btn btn-warning">No</button>
+                  </div>
+                  {%endif%}
+                <div class="media-body">
+                  <h5 class="mt-0">{{ comments.autor.nombre }}</h5>
+                  <p>{{ comments.cuerpo }}</p>
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+        </div>
+      </div>
+   
 </div>
 {% endblock %}
