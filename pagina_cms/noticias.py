@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import noticias, grupos, usuarios, comentarios
-from django.core.exceptions import PermissionDenied
 
 
 def agregar_noticia(request):
@@ -40,8 +39,14 @@ def eliminar_noticia(request, noticia_id):
     return redirect('ver_noticias')
 
 def ver_noticias(request):
-    vernoticias = noticias.objects.all().order_by('-fecha')
-    return render(request, 'noticia_ver.html', {'noticias': vernoticias})
+    grupo_id = request.GET.get('grupo')
+    if grupo_id:
+        vernoticias = noticias.objects.filter(grupo_id=grupo_id).order_by('-fecha')
+    else:
+        vernoticias = noticias.objects.all().order_by('-fecha')
+    
+    vergrupos = grupos.objects.all()
+    return render(request, 'ver_noticias.html', {'noticias': vernoticias, 'grupos': vergrupos, 'grupo_seleccionado': grupo_id})
 
 
 def ver_noticia_completa(request, noticia_id):

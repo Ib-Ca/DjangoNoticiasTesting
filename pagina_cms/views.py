@@ -69,21 +69,31 @@ class PublicarComentarioAPI(generics.CreateAPIView):
     serializer_class = ComentarioSerializer
 
     def post(self, request, *args, **kwargs):
-        # Verificar si todos los campos necesarios están presentes en la solicitud
         if 'cuerpo' not in request.data or 'autor' not in request.data or 'noticia' not in request.data or 'visible' not in request.data:
             return Response({'detail': 'Todos los campos son requeridos: cuerpo, autor, noticia, visible.'}, status=status.HTTP_400_BAD_REQUEST)
         
         cuerpo = request.data.get('cuerpo')
-        autor_id = request.data.get('autor')  # Obtenemos el ID del autor
+        autor_id = request.data.get('autor') 
         noticia_id = request.data.get('noticia')
         visible = request.data.get('visible')
      
         autor = get_object_or_404(usuarios, pk=autor_id)
         noticia = get_object_or_404(noticias, pk=noticia_id)
-
-       
-
-        # Crear el comentario
         comentario = comentarios.objects.create(cuerpo=cuerpo, autor=autor, noticia=noticia, visible=visible)
 
         return Response({'message': 'Comentario creado correctamente'}, status=status.HTTP_201_CREATED)
+
+class RegistrarUsuarioAPI(generics.CreateAPIView):
+    serializer_class = UsuarioSerializer
+    def post(self, request, *args, **kwargs):
+        if 'nombre' not in request.data or 'usuario' not in request.data or 'clave' not in request.data:
+            return Response({'detail': 'Todos los campos son requeridos: nombre, usuario, clave.'}, status=status.HTTP_400_BAD_REQUEST)  
+        nombre = request.data.get('nombre')
+        usuario = request.data.get('usuario')
+        clave = request.data.get('clave')
+        estado = 'ACTIVO'
+        nivel = 'LECTOR'
+
+        usuario_nuevo = usuarios.objects.create(nombre=nombre, usuario=usuario, clave=clave, estado=estado, nivel=nivel)
+
+        return Response({'message': 'Usuario creado correctamente'}, status=status.HTTP_201_CREATED)

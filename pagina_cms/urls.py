@@ -28,4 +28,5 @@ urlpatterns = [
     path('nuevo_grupo/', grupo.nuevo_grupo, name='nuevo_grupo'),
     path('modificar_grupo/<int:id>/', grupo.modificar_grupo, name='modificar_grupo'),
     path('borrar_grupo/<int:id>/', grupo.borrar_grupo, name='borrar_grupo'),
+    path('crear_usuario/', views.RegistrarUsuarioAPI.as_view(), name='crear_usuario'),
 ]

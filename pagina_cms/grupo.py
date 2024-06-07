@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import grupos
+from django.contrib import messages
 
 def ver_grupos(request):
     if request.method == 'GET':
@@ -34,7 +35,14 @@ def modificar_grupo(request, id):
     else:
         return render(request, 'grupo_modify.html', {'grupo': grupo})
 
+
 def borrar_grupo(request, id):
-    grupo_para_borrar = get_object_or_404(grupos, pk=id)
-    grupo_para_borrar.delete()
+    try:
+        grupo_para_borrar = get_object_or_404(grupos, pk=id)
+        grupo_para_borrar.delete()
+        messages.success(request, 'El grupo ha sido eliminado correctamente.')
+    except Exception as e:
+        messages.error(request, f'Error al eliminar el grupo')
+
     return redirect('ver_grupos')
+
