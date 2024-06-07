@@ -4,6 +4,7 @@ from .models import noticias, comentarios, usuarios
 
 def enviar_comentario(request, noticia_id):
     noticia = get_object_or_404(noticias, pk=noticia_id) 
+    print(noticia)
     if request.method == 'POST': 
         if 'nivel_usuario' in request.session:
             nombre_usuario= request.session['nombre_usuario']

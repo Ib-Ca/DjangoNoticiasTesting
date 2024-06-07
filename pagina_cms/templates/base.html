@@ -58,6 +58,8 @@
           {% if nivel_usuario == "ADMINISTRADOR" %}
           <li><a href="{% url  'addnoti' %}" class="nav-link">Agregar Noticia</a></li>
           <li><a href="{% url 'verusuario' %}">Administrar Usuarios</a></li>
+          <li><a href="{% url 'ver_grupos' %}">Administrar Grupos</a></li>
+
           {% endif %}
           {% if usuario_autenticado %}
           <li><a href="{% url 'acceder' %}" >Panel de Usuario</a></li>

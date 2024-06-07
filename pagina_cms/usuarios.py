@@ -12,7 +12,7 @@ def ver(request):
                 return render(request, 'usuario_ver.html', variables)
             else:
                 variables={}
-                variables['m_error']='No tiene permisos para acceder al módulo de usuario'
+                variabes={}
                 variables['nombre_usuario']= request.session['nombre_usuario']
                 return render(request,'panel.html', variables)
         else:

@@ -1,5 +1,5 @@
 from django.urls import path
-from . import inicio, usuarios, noticias, comentarios, views
+from . import inicio, usuarios, noticias, comentarios, views, grupo
 
 urlpatterns = [
     path('', inicio.inicio, name='inicio'),
@@ -21,4 +21,11 @@ urlpatterns = [
     path('listanoticias/<int:id>', views.NoticiasAPIDetalle.as_view(), name='detallenoticias'),
     path('listagrupos', views.GruposAPILista.as_view(), name='listagrupos'),
     path('nuevogrupo', views.GruposAPINuevo.as_view(), name='nuevogrupo'),
+    path('registro/', views.UsuarioRegistroAPI.as_view(), name='usuario_registro'),
+    path('login/', views.UsuarioLoginAPI.as_view(), name='usuario_login'),
+    path('noticias/<int:noticia_id>/comentarios/', views.PublicarComentarioAPI.as_view(), name='publicar_comentario'),
+    path('ver_grupos/', grupo.ver_grupos, name='ver_grupos'),
+    path('nuevo_grupo/', grupo.nuevo_grupo, name='nuevo_grupo'),
+    path('modificar_grupo/<int:id>/', grupo.modificar_grupo, name='modificar_grupo'),
+    path('borrar_grupo/<int:id>/', grupo.borrar_grupo, name='borrar_grupo'),
 ]

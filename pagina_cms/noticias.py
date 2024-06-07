@@ -43,6 +43,7 @@ def ver_noticias(request):
     vernoticias = noticias.objects.all().order_by('-fecha')
     return render(request, 'noticia_ver.html', {'noticias': vernoticias})
 
+
 def ver_noticia_completa(request, noticia_id):
     noticia = get_object_or_404(noticias, id=noticia_id)
     nivel_usuario = request.session.get('nivel_usuario')
